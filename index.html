@@ -25,6 +25,30 @@
   }
   .wrap { max-width: 880px; margin: 0 auto; padding: 0 20px; }
 
+  .lang {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    border: 1px solid var(--line);
+    background: var(--card);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .lang button {
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    padding: 6px 14px;
+    font: inherit;
+    font-size: .82rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: .2s;
+  }
+  .lang button:hover { color: var(--accent); }
+  .lang button.active { background: var(--accent); color: #fff; }
+
   header { padding: 90px 0 50px; text-align: center; }
   header h1 {
     font-family: 'Playfair Display', serif;
@@ -95,65 +119,118 @@
 </head>
 <body>
 
+<div class="lang" id="lang">
+  <button type="button" data-lang="ru">RU</button>
+  <button type="button" data-lang="en">EN</button>
+</div>
+
 <header class="wrap">
-  <div class="role">Psy student · Scientific research</div>
-  <h1>Сэма</h1>
-  <p class="lead">Студентка-психолог. Здесь собраны мои научные статьи и исследовательские работы.</p>
+  <div class="role" data-i18n="role"></div>
+  <h1 data-i18n="name"></h1>
+  <p class="lead" data-i18n="lead"></p>
 </header>
 
 <main class="wrap">
-  <h2>Публикации</h2>
+  <h2 data-i18n="publications"></h2>
   <div class="filters" id="filters"></div>
   <div id="articles"></div>
 </main>
 
 <footer class="wrap">
-  <p>Связаться со мной:
+  <p><span data-i18n="contact"></span>
     <a href="mailto:23eun.s@gmail.com">Email</a>
     <a href="https://t.me/armoredheart" target="_blank" rel="noopener">Telegram</a>
   </p>
-  <p style="margin-top:10px">© <span id="year"></span> Сэма</p>
+  <p style="margin-top:10px">© <span id="year"></span> <span data-i18n="name"></span></p>
 </footer>
 
 <script>
-  // === ДОБАВЛЯЙ СТАТЬИ ЗДЕСЬ: копируй блок { ... }, меняй текст ===
+  // ===== ТЕКСТЫ САЙТА: ru / en =====
+  const I18N = {
+    ru: {
+      title: "Сэма | Научные статьи по психологии",
+      description: "Научные публикации по психологии",
+      role: "Psy student · Научные исследования",
+      name: "Сэма",
+      lead: "Студентка-психолог. Здесь собраны мои научные статьи и исследовательские работы.",
+      publications: "Публикации",
+      contact: "Связаться со мной:",
+      all: "Все",
+      emptyTitle: "Скоро здесь появятся статьи",
+      emptyText: "Публикации и исследовательские работы добавляются, загляните позже."
+    },
+    en: {
+      title: "Sema | Scientific articles in psychology",
+      description: "Scientific publications in psychology",
+      role: "Psy student · Scientific research",
+      name: "Sema",
+      lead: "Psychology student. This is where my scientific articles and research work are collected.",
+      publications: "Publications",
+      contact: "Get in touch:",
+      all: "All",
+      emptyTitle: "Articles are coming soon",
+      emptyText: "Publications and research papers are being added, please check back later."
+    }
+  };
+
+  // ===== ДОБАВЛЯЙ СТАТЬИ ЗДЕСЬ =====
+  // Любое текстовое поле можно писать двумя способами:
+  //   просто строкой (одинаково на обоих языках): "Текст"
+  //   или для двух языков: { ru: "Текст", en: "Text" }
   // Пример блока статьи (скопируй внутрь [ ] и заполни):
   // {
-  //   title: "Название статьи",
+  //   title: { ru: "Название статьи", en: "Article title" },
   //   year: 2026,
-  //   journal: "Журнал / конференция",
-  //   abstract: "Краткая аннотация в 2-3 предложения.",
-  //   tags: ["тег1", "тег2"],
-  //   links: [{ label: "Читать (DOI)", url: "https://doi.org/..." }]
+  //   journal: { ru: "Журнал / конференция", en: "Journal / conference" },
+  //   abstract: { ru: "Краткая аннотация.", en: "Short abstract." },
+  //   tags: [{ ru: "тревожность", en: "anxiety" }],
+  //   links: [{ label: { ru: "Читать", en: "Read" }, url: "https://doi.org/..." }]
   // }
   const articles = [];
-  // ================================================================
+  // =================================
+
+  let lang = 'ru';
+  try {
+    const saved = localStorage.getItem('lang');
+    if (saved === 'ru' || saved === 'en') lang = saved;
+    else if (!(navigator.language || 'ru').toLowerCase().startsWith('ru')) lang = 'en';
+  } catch (e) {}
+
+  const tr = v => (v && typeof v === 'object') ? (v[lang] || v.ru || v.en || '') : v;
+  const T = key => I18N[lang][key];
 
   const list = document.getElementById('articles');
   const filters = document.getElementById('filters');
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  const allTags = ['Все', ...new Set(articles.flatMap(a => a.tags))];
-  let current = 'Все';
+  let current = null; // null = «Все / All»
+
+  function applyStatic() {
+    document.documentElement.lang = lang;
+    document.title = T('title');
+    document.querySelector('meta[name="description"]').setAttribute('content', T('description'));
+    document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = T(el.dataset.i18n); });
+    document.querySelectorAll('#lang button').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  }
 
   function render() {
     list.innerHTML = '';
     if (!articles.length) {
-      list.innerHTML = '<div class="card"><h3>Скоро здесь появятся статьи</h3><p>Публикации и исследовательские работы добавляются, загляните позже.</p></div>';
+      list.innerHTML = `<div class="card"><h3>${T('emptyTitle')}</h3><p>${T('emptyText')}</p></div>`;
       return;
     }
     articles
-      .filter(a => current === 'Все' || a.tags.includes(current))
+      .filter(a => current === null || a.tags.some(t => tr(t) === current))
       .sort((a, b) => b.year - a.year)
       .forEach(a => {
         const el = document.createElement('article');
         el.className = 'card';
         el.innerHTML = `
-          <div class="meta">${a.year} · ${a.journal}</div>
-          <h3>${a.title}</h3>
-          <p>${a.abstract}</p>
-          <div class="tags">${a.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
-          <div class="links">${a.links.map(l => `<a href="${l.url}" target="_blank" rel="noopener">${l.label} →</a>`).join('')}</div>`;
+          <div class="meta">${a.year} · ${tr(a.journal)}</div>
+          <h3>${tr(a.title)}</h3>
+          <p>${tr(a.abstract)}</p>
+          <div class="tags">${a.tags.map(t => `<span class="tag">${tr(t)}</span>`).join('')}</div>
+          <div class="links">${a.links.map(l => `<a href="${l.url}" target="_blank" rel="noopener">${tr(l.label)} →</a>`).join('')}</div>`;
         list.appendChild(el);
       });
   }
@@ -161,15 +238,30 @@
   function renderFilters() {
     filters.innerHTML = '';
     if (!articles.length) return;
-    allTags.forEach(t => {
+    const tags = [...new Set(articles.flatMap(a => a.tags.map(tr)))];
+    [null, ...tags].forEach(t => {
       const b = document.createElement('button');
-      b.textContent = t;
+      b.textContent = t === null ? T('all') : t;
       if (t === current) b.classList.add('active');
       b.onclick = () => { current = t; renderFilters(); render(); };
       filters.appendChild(b);
     });
   }
 
+  function setLang(l) {
+    lang = l;
+    current = null;
+    try { localStorage.setItem('lang', l); } catch (e) {}
+    applyStatic();
+    renderFilters();
+    render();
+  }
+
+  document.querySelectorAll('#lang button').forEach(b => {
+    b.addEventListener('click', () => setLang(b.dataset.lang));
+  });
+
+  applyStatic();
   renderFilters();
   render();
 </script>
