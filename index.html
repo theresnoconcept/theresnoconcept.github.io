@@ -96,7 +96,7 @@
 <body>
 
 <header class="wrap">
-  <div class="role">Психология · Научные исследования</div>
+  <div class="role">Psy student · Научные исследования</div>
   <h1>Сэма</h1>
   <p class="lead">Студентка-психолог. Здесь собраны мои научные статьи и исследовательские работы.</p>
 </header>
@@ -109,35 +109,24 @@
 
 <footer class="wrap">
   <p>Связаться со мной:
-    <a href="mailto:ТВОЯ_ПОЧТА@example.com">Email</a>
-    <a href="https://t.me/ТВОЙ_НИК">Telegram</a>
+    <a href="mailto:23eun.s@gmail.com">Email</a>
+    <a href="https://t.me/armoredheart" target="_blank" rel="noopener">Telegram</a>
   </p>
   <p style="margin-top:10px">© <span id="year"></span> Сэма</p>
 </footer>
 
 <script>
   // === ДОБАВЛЯЙ СТАТЬИ ЗДЕСЬ: копируй блок { ... }, меняй текст ===
-  const articles = [
-    {
-      title: "Название первой статьи",
-      year: 2026,
-      journal: "Название журнала / конференции",
-      abstract: "Краткая аннотация в 2-3 предложения: о чём исследование и главный вывод.",
-      tags: ["тревожность", "студенты"],
-      links: [
-        { label: "Читать (DOI)", url: "https://doi.org/..." },
-        { label: "PDF", url: "articles/stat1.pdf" }
-      ]
-    },
-    {
-      title: "Название второй статьи",
-      year: 2025,
-      journal: "Название журнала",
-      abstract: "Краткая аннотация второй работы.",
-      tags: ["детская психология"],
-      links: [{ label: "Читать", url: "#" }]
-    }
-  ];
+  // Пример блока статьи (скопируй внутрь [ ] и заполни):
+  // {
+  //   title: "Название статьи",
+  //   year: 2026,
+  //   journal: "Журнал / конференция",
+  //   abstract: "Краткая аннотация в 2-3 предложения.",
+  //   tags: ["тег1", "тег2"],
+  //   links: [{ label: "Читать (DOI)", url: "https://doi.org/..." }]
+  // }
+  const articles = [];
   // ================================================================
 
   const list = document.getElementById('articles');
@@ -149,6 +138,10 @@
 
   function render() {
     list.innerHTML = '';
+    if (!articles.length) {
+      list.innerHTML = '<div class="card"><h3>Скоро здесь появятся статьи</h3><p>Публикации и исследовательские работы добавляются, загляните позже.</p></div>';
+      return;
+    }
     articles
       .filter(a => current === 'Все' || a.tags.includes(current))
       .sort((a, b) => b.year - a.year)
@@ -167,6 +160,7 @@
 
   function renderFilters() {
     filters.innerHTML = '';
+    if (!articles.length) return;
     allTags.forEach(t => {
       const b = document.createElement('button');
       b.textContent = t;
