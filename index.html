@@ -3,22 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Сэма | Научные статьи по психологии</title>
+<title>nerd gang | Материалы и занятия по психологии</title>
 <meta name="description" content="Научные публикации по психологии">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #faf7f5;
-    --card: #ffffff;
-    --text: #2b2b33;
-    --muted: #7a7a85;
-    --accent: #b08bbb;
-    --accent-soft: #efe5f3;
-    --line: #ebe4e0;
+    --bg: #292726;
+    --card: #32302f;
+    --text: #F3F3F3;
+    --muted: #b8b8b8;
+    --accent: #FAD7E5;
+    --accent-soft: #44363d;
+    --line: #3c3c3c;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    font-family: 'Inter', sans-serif;
+    font-family: system-ui, sans-serif;
     background: var(--bg);
     color: var(--text);
     line-height: 1.6;
@@ -47,7 +47,7 @@
     transition: .2s;
   }
   .lang button:hover { color: var(--accent); }
-  .lang button.active { background: var(--accent); color: #fff; }
+  .lang button.active { background: var(--accent); color: #292726; }
 
   header { padding: 90px 0 50px; text-align: center; }
   header h1 {
@@ -59,7 +59,7 @@
     color: var(--accent);
     font-weight: 500;
     letter-spacing: .08em;
-    text-transform: uppercase;
+    
     font-size: .85rem;
   }
   header p.lead {
@@ -88,7 +88,7 @@
     transition: .2s;
   }
   .filters button:hover { border-color: var(--accent); }
-  .filters button.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .filters button.active { background: var(--accent); border-color: var(--accent); color: #292726; }
 
   .card {
     background: var(--card);
@@ -101,9 +101,9 @@
   .card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(120, 90, 130, .1); }
   .card .meta { color: var(--muted); font-size: .85rem; margin-bottom: 8px; }
   .card h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 10px; }
-  .card p { color: #55555f; margin-bottom: 16px; }
+  .card p { color: #cdcdcd; margin-bottom: 16px; }
   .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
-  .tag { background: var(--accent-soft); color: #7c5a89; font-size: .78rem; padding: 3px 11px; border-radius: 999px; }
+  .tag { background: var(--accent-soft); color: #FAD7E5; font-size: .78rem; padding: 3px 11px; border-radius: 999px; }
   .links a {
     color: var(--accent);
     font-weight: 500;
@@ -115,6 +115,23 @@
 
   footer { text-align: center; padding: 60px 0 50px; color: var(--muted); font-size: .9rem; }
   footer a { color: var(--accent); text-decoration: none; margin: 0 8px; }
+  .actions { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top:24px; }
+  .actions a { border:1px solid var(--line); border-radius:12px; padding:10px 16px; color:var(--accent); text-decoration:none; }
+  .actions a:first-child { background:var(--accent); color:var(--bg); }
+  main section { margin-bottom:42px; }
+  a:focus-visible, button:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
+  @media (max-width: 600px) {
+    .wrap { padding-inline: 16px; }
+    .lang { position: static; width: fit-content; margin: 12px 16px 0 auto; }
+    .lang button { min-height: 44px; min-width: 44px; }
+    header.wrap { padding-top: 32px; padding-bottom: 32px; }
+    header .role { letter-spacing: .04em; }
+    .actions { gap: 8px; }
+    .actions a { display: grid; place-items: center; min-height: 44px; padding-inline: 12px; }
+    .card { padding: 18px; overflow-wrap: anywhere; }
+    .links a, footer a { display: inline-flex; align-items: center; min-height: 44px; }
+    footer { padding-block: 30px; }
+  }
 </style>
 </head>
 <body>
@@ -125,18 +142,38 @@
 </div>
 
 <header class="wrap">
-  <div class="role" data-i18n="role"></div>
-  <h1 data-i18n="name"></h1>
-  <p class="lead" data-i18n="lead"></p>
+  <div class="role" data-i18n="role">sup there! welcome to the psy gang</div>
+  <h1 data-i18n="name">nerd gang</h1>
+  <p class="lead" data-i18n="lead">здесь: интерактивные тренинги и авторские научные статьи на актуальные темы :^в</p>
+  <nav class="actions">
+    <a href="#lessons" data-i18n="lessons">интерактив</a>
+    <a href="#publications" data-i18n="publications">публикации</a>
+    <a href="#contact" data-i18n="contactNav">контакты</a>
+  </nav>
 </header>
 
 <main class="wrap">
-  <h2 data-i18n="publications"></h2>
+  <section id="lessons">
+    <h2 data-i18n="lessons">интерактив</h2>
+    <article class="card">
+      <div class="meta" data-i18n="lectureMeta">Школьная лекция · В разработке</div>
+      <h3 data-i18n="lecture">Почему мы так реагируем?</h3>
+      <p data-i18n="lectureText">На примерах из школы и переписок разберём, как психология изучает эмоции и поведение.</p>
+      <div class="links"><a href="mailto:23eun.s@gmail.com" data-i18n="invite">Обсудить лекцию для школы</a></div>
+    </article>
+  </section>
+  <section id="publications">
+  <h2 data-i18n="publications">публикации</h2>
   <div class="filters" id="filters"></div>
   <div id="articles"></div>
+  </section>
+  <section id="about">
+    <h2 data-i18n="about">обо мне</h2>
+    <p data-i18n="bio">Привет!! Я Сэма, я учусь на психолога (2ой курс). Тут вы можете ознакомиться с моими научными статьями на интересующие меня темы как зумера. Также в скором времени осуществлю проведение тренингов для ребят школьного возраста (9-11 классы). Stay tuned!</p>
+  </section>
 </main>
 
-<footer class="wrap">
+<footer class="wrap" id="contact">
   <p><span data-i18n="contact"></span>
     <a href="mailto:23eun.s@gmail.com">Email</a>
     <a href="https://t.me/armoredheart" target="_blank" rel="noopener">Telegram</a>
@@ -148,23 +185,33 @@
   // ===== ТЕКСТЫ САЙТА: ru / en =====
   const I18N = {
     ru: {
-      title: "Сэма | Научные статьи по психологии",
+      title: "nerd gang | Материалы и занятия по психологии",
       description: "Научные публикации по психологии",
-      role: "Студентка-психолог · Научные исследования",
-      name: "Сэма",
-      lead: "Здесь собраны мои научные статьи и исследовательские работы по психологии.",
-      publications: "Публикации",
-      contact: "Связаться со мной:",
+      role: "sup there! welcome to the psy gang",
+      name: "nerd gang",
+      lead: "здесь: интерактивные тренинги и авторские научные статьи на актуальные темы :^в",
+      lessons: "интерактив", contactNav: "контакты", about: "обо мне",
+      lectureMeta: "Школьная лекция · В разработке", lecture: "Почему мы так реагируем?",
+      lectureText: "На примерах из школы и переписок разберём, как психология изучает эмоции и поведение.",
+      invite: "Обсудить лекцию для школы",
+      bio: "Привет!! Я Сэма, я учусь на психолога (2ой курс). Тут вы можете ознакомиться с моими научными статьями на интересующие меня темы как зумера. Также в скором времени осуществлю проведение тренингов для ребят школьного возраста (9-11 классы). Stay tuned!",
+      publications: "публикации",
+      contact: "мои контакты",
       all: "Все",
       emptyTitle: "Скоро здесь появятся статьи",
       emptyText: "Публикации и исследовательские работы добавляются, загляните позже."
     },
     en: {
-      title: "Sema | Scientific articles in psychology",
+      title: "nerd gang | Psychology materials and sessions",
       description: "Scientific publications in psychology",
-      role: "Psy student · Scientific research",
-      name: "Sema",
-      lead: "Psychology student. This is where my scientific articles and research work are collected.",
+      role: "sup there! welcome to the psy gang",
+      name: "nerd gang",
+      lead: "Psychology research and educational sessions for high school students.",
+      lessons: "interactive", contactNav: "Contact", about: "About",
+      lectureMeta: "School talk · In development", lecture: "Why do we react the way we do?",
+      lectureText: "We'll use examples from school and group chats to explore how psychology studies emotions and behavior.",
+      invite: "Discuss a talk for your school",
+      bio: "I'm Sema, a psychology student. I collect my research here and develop educational sessions for high school students.",
       publications: "Publications",
       contact: "Get in touch:",
       all: "All",
@@ -193,7 +240,7 @@
   try {
     const saved = localStorage.getItem('lang');
     if (saved === 'ru' || saved === 'en') lang = saved;
-    else if (!(navigator.language || 'ru').toLowerCase().startsWith('ru')) lang = 'en';
+
   } catch (e) {}
 
   const tr = v => (v && typeof v === 'object') ? (v[lang] || v.ru || v.en || '') : v;
@@ -267,3 +314,6 @@
 </script>
 </body>
 </html>
+
+
+
