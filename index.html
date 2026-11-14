@@ -132,6 +132,16 @@
     .links a, footer a { display: inline-flex; align-items: center; min-height: 44px; }
     footer { padding-block: 30px; }
   }
+  #publications {
+    padding: clamp(16px, 4vw, 32px);
+    border: 1px solid #765968;
+    border-radius: 24px;
+    background: repeating-linear-gradient(0deg, transparent 0 23px, #fad7e512 23px 24px),
+      linear-gradient(135deg, #513745, #302831 75%);
+  }
+  #publications .card { background: #f4e5e8; color: #322630; border-color: #e7cbd5; }
+  #publications .card p, #publications .card .meta { color: #52424d; }
+  #publications .card a { color: #712c52; }
 </style>
 </head>
 <body>
@@ -158,8 +168,8 @@
     <article class="card">
       <div class="meta" data-i18n="lectureMeta">Школьная лекция · В разработке</div>
       <h3 data-i18n="lecture">Почему мы так реагируем?</h3>
-      <p data-i18n="lectureText">На примерах из школы и переписок разберём, как психология изучает эмоции и поведение.</p>
-      <div class="links"><a href="mailto:23eun.s@gmail.com" data-i18n="invite">Обсудить лекцию для школы</a></div>
+      <p data-i18n="lectureText">Почему одна и та же фраза в чате может рассмешить или задеть? На примерах из школы и переписок разберём, как связаны мысли, эмоции и реакции.</p>
+      <div class="links"><a href="mailto:23eun.s@gmail.com" data-i18n="invite">Написать о встрече в школе</a></div>
     </article>
   </section>
   <section id="publications">
@@ -169,7 +179,7 @@
   </section>
   <section id="about">
     <h2 data-i18n="about">обо мне</h2>
-    <p data-i18n="bio">Привет!! Я Сэма, я учусь на психолога (2ой курс). Тут вы можете ознакомиться с моими научными статьями на интересующие меня темы как зумера. Также в скором времени осуществлю проведение тренингов для ребят школьного возраста (9-11 классы). Stay tuned!</p>
+    <p data-i18n="bio">Привет!! Я Сэма, учусь на психолога (2ой курс). Здесь вы можете ознакомиться с моими научными статьями. Также в скором времени я планирую начать проводить тренинги для ребят выпускных классов (9-11). Stay tuned!</p>
   </section>
 </main>
 
@@ -192,9 +202,9 @@
       lead: "здесь: интерактивные тренинги и авторские научные статьи на актуальные темы :^в",
       lessons: "интерактив", contactNav: "контакты", about: "обо мне",
       lectureMeta: "Школьная лекция · В разработке", lecture: "Почему мы так реагируем?",
-      lectureText: "На примерах из школы и переписок разберём, как психология изучает эмоции и поведение.",
-      invite: "Обсудить лекцию для школы",
-      bio: "Привет!! Я Сэма, я учусь на психолога (2ой курс). Тут вы можете ознакомиться с моими научными статьями на интересующие меня темы как зумера. Также в скором времени осуществлю проведение тренингов для ребят школьного возраста (9-11 классы). Stay tuned!",
+      lectureText: "Почему одна и та же фраза в чате может рассмешить или задеть? На примерах из школы и переписок разберём, как связаны мысли, эмоции и реакции.",
+      invite: "Написать о встрече в школе",
+      bio: "Привет!! Я Сэма, учусь на психолога (2ой курс). Здесь вы можете ознакомиться с моими научными статьями. Также в скором времени я планирую начать проводить тренинги для ребят выпускных классов (9-11). Stay tuned!",
       publications: "публикации",
       contact: "мои контакты",
       all: "Все",
@@ -207,13 +217,13 @@
       role: "sup there! welcome to the psy space",
       name: "nerd gang",
       lead: "Psychology research and educational sessions for high school students.",
-      lessons: "interactive", contactNav: "Contact", about: "About",
+      lessons: "interactive", contactNav: "contact", about: "about",
       lectureMeta: "School talk · In development", lecture: "Why do we react the way we do?",
-      lectureText: "We'll use examples from school and group chats to explore how psychology studies emotions and behavior.",
-      invite: "Discuss a talk for your school",
+      lectureText: "Why can the same message make one person laugh and hurt another? We'll use examples from school and group chats to explore how thoughts, emotions and reactions are connected.",
+      invite: "Ask about a school session",
       bio: "I'm Sema, a psychology student. I collect my research here and develop educational sessions for high school students.",
-      publications: "Publications",
-      contact: "Get in touch:",
+      publications: "publications",
+      contact: "get in touch",
       all: "All",
       emptyTitle: "Articles are coming soon",
       emptyText: "Publications and research papers are being added, please check back later."
